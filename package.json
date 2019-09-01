@@ -5,7 +5,7 @@
   "author": "Daiki-Ishida <missoula0132@gmail.com>",
   "private": true,
   "scripts": {
-    "dev": "HOST=0.0.0.0 PORT=3035 webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
+    "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "jest --config test/unit/jest.conf.js --coverage",
     "e2e": "node test/e2e/runner.js",
