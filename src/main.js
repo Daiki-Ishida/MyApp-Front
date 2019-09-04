@@ -7,6 +7,10 @@ import store from './store.js'
 import router from './router.js'
 
 import './assets/init.css'
+import '@fortawesome/fontawesome-free-webfonts/css/fontawesome.css'
+import '@fortawesome/fontawesome-free-webfonts/css/fa-brands.css'
+import '@fortawesome/fontawesome-free-webfonts/css/fa-regular.css'
+import '@fortawesome/fontawesome-free-webfonts/css/fa-solid.css'
 
 Vue.config.productionTip = false
 
@@ -15,6 +19,5 @@ new Vue({
   el: '#app',
   store,
   router,
-  components: { App },
-  template: '<App/>'
+  render: h => h(App)
 })
