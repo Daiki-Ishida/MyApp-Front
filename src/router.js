@@ -5,6 +5,8 @@ import HelloWorld from "./components/HelloWorld";
 import Users from '@/views/Users'
 import SignUp from '@/views/SignUp'
 import SignIn from '@/views/SignIn'
+import Blogs from '@/views/Blogs'
+
 
 Vue.use(VueRouter)
 
@@ -28,6 +30,11 @@ const router = new VueRouter({
       path: '/sign-in',
       name: SignIn,
       component: SignIn
+    },
+    {
+      path: '/blogs',
+      name: Blogs,
+      component: Blogs
     }
   ]
 })

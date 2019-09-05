@@ -39,7 +39,8 @@ const setUrl = (type) => {
 const store = new Vuex.Store({
   state: {
     users: [],
-    currentUser: sessionStorage.fetch()
+    currentUser: sessionStorage.fetch(),
+    blogs: []
   },
   getters: {
     allUsers(state) {
@@ -47,6 +48,9 @@ const store = new Vuex.Store({
     },
     currentUser(state) {
       return state.currentUser
+    },
+    allBlogs(state) {
+      return state.blogs
     }
   },
   mutations: {
@@ -59,6 +63,9 @@ const store = new Vuex.Store({
     login(state, payload) {
       state.currentUser = payload
       sessionStorage.save(state.currentUser)
+    },
+    fetchAllBlogs(state, payload) {
+      state.blogs = payload
     }
   },
   actions: {
@@ -77,7 +84,6 @@ const store = new Vuex.Store({
       axios.post(url, payload, options).then((res) => {
         commit('addUser', res.data)
       });
-
     },
     login({ commit }, payload) {
       url = setUrl("login");
@@ -85,6 +91,15 @@ const store = new Vuex.Store({
       axios.post(url, payload, options).then((res) => {
         commit('login', res.data)
       });
+    },
+    fetchAllBlogs({ commit }) {
+      url = setUrl("blogs")
+      options = setRequestOptions("GET")
+      axios.get(url, options).then(
+        (res) => {
+          commit("fetchAllBlogs", res.data)
+        }
+      )
     }
   }
 })
