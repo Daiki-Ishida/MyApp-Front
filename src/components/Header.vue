@@ -4,20 +4,33 @@
       <div class="header-left">
         <div class="header-logo">
           <img src="../assets/logo.png" />
-          My-App
+        </div>
+        <div class="header-title">
+          <router-link to="/">My-App</router-link>
         </div>
       </div>
       <div class="header-right">
-        <nav>
+        <nav class="header-nav">
           <ul>
             <li>
               <router-link to="/">Home</router-link>
             </li>
+            <li>
+              <router-link to="/sign-in">Login</router-link>
+            </li>
+            <li>
+              <router-link to="/sign-up">Sign Up</router-link>
+            </li>
           </ul>
         </nav>
+        <div class="session-status">
+          <p v-if="currentUser.id">Logged in as {{currentUser.name}}</p>
+          <p v-else>
+            <router-link to="/sign-up">Sign Up Now!</router-link>
+          </p>
+        </div>
       </div>
     </nav>
-    <p v-if="user.id">Now logged in as {{user.name}}</p>
   </header>
 </template>
 
@@ -25,7 +38,7 @@
 export default {
   name: "Header",
   computed: {
-    user() {
+    currentUser() {
       return this.$store.getters.currentUser;
     }
   }
@@ -33,12 +46,16 @@ export default {
 </script>
 
 <style>
-header {
-  background: #3ab383;
+a {
   color: #fff;
 }
 
-.header {
+header {
+  background: #3787e2;
+  color: #fff;
+}
+
+.header-content {
   max-width: 1140px;
   height: 60px;
   margin: 0 auto;
@@ -46,22 +63,37 @@ header {
   justify-content: space-between;
 }
 
-.header-logo {
-  line-height: 60px;
-  font-size: 24px;
+.header-left,
+.header-right {
+  display: flex;
 }
 
 .header-logo img {
   height: 60px;
 }
 
-nav ul li {
-  display: inline;
-  margin-right: 15px;
+.header-title {
   line-height: 60px;
+  font-size: 24px;
 }
 
-li a {
-  color: #fff;
+.header-nav li {
+  display: inline-block;
+  margin-right: 15px;
+  line-height: 60px;
+  font-weight: bold;
+}
+
+.header-nav li a {
+  transition: 0.3s;
+}
+
+.header-nav li a:hover {
+  color: #fef451;
+}
+
+.session-status {
+  margin-left: 50px;
+  line-height: 60px;
 }
 </style>
