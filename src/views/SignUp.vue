@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     createUser(user) {
-      this.$store.dispatch("createUser", user);
+      this.$store.dispatch("signUp", user);
       this.$router.push({ path: "/users" });
     }
   }

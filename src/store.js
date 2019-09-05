@@ -5,6 +5,19 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+var STORAGE_KEY = 'test'
+var sessionStorage = {
+  fetch: function () {
+    var currentUser = JSON.parse(
+      localStorage.getItem(STORAGE_KEY) || '{}'
+    )
+    return currentUser
+  },
+  save: function (currentUser) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(currentUser))
+  }
+}
+
 let url;
 let options;
 
@@ -25,19 +38,27 @@ const setUrl = (type) => {
 
 const store = new Vuex.Store({
   state: {
-    users: {}
+    users: [],
+    currentUser: sessionStorage.fetch()
   },
   getters: {
     allUsers(state) {
       return state.users
+    },
+    currentUser(state) {
+      return state.currentUser
     }
   },
   mutations: {
     fetchAllUsers(state, payload) {
       state.users = payload
     },
-    createUser(state, payload) {
-      state.users.push(payload)
+    addUser(state, payload) {
+      state.users.push(payload);
+    },
+    login(state, payload) {
+      state.currentUser = payload
+      sessionStorage.save(state.currentUser)
     }
   },
   actions: {
@@ -45,18 +66,27 @@ const store = new Vuex.Store({
       url = setUrl("users");
       options = setRequestOptions("GET");
       axios.get(url, options).then(
-        res => {
+        (res) => {
           commit('fetchAllUsers', res.data)
         }
       )
     },
-    createUser({ commit }, payload) {
+    signUp({ commit }, payload) {
       url = setUrl("users");
       options = setRequestOptions("POST");
-      axios.post(url, payload, options)
+      axios.post(url, payload, options).then((res) => {
+        commit('addUser', res.data)
+      });
+
+    },
+    login({ commit }, payload) {
+      url = setUrl("login");
+      options = setRequestOptions("POST");
+      axios.post(url, payload, options).then((res) => {
+        commit('login', res.data)
+      });
     }
   }
 })
 
 export default store
-
