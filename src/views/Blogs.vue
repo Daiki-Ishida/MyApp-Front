@@ -6,19 +6,29 @@
         <BlogCard v-bind:blog="blog" />
       </div>
     </div>
+    <div class="create-btn">
+      <FixedBtn v-bind:content="content" />
+    </div>
   </div>
 </template>
 
 <script>
 import BlogCard from "../components/BlogCard";
+import FixedBtn from "../components/FixedBtn";
 
 export default {
   name: "Blogs",
   components: {
-    BlogCard
+    BlogCard,
+    FixedBtn
   },
   created() {
     this.$store.dispatch("fetchAllBlogs");
+  },
+  data() {
+    return {
+      content: "Create New Post!"
+    };
   },
   computed: {
     blogs() {
@@ -43,5 +53,15 @@ export default {
 
 .blog {
   margin: 20px;
+}
+
+.create-btn {
+  position: fixed;
+  bottom: 60px;
+  right: 120px;
+}
+
+.create-btn button {
+  background-color: #ee7768;
 }
 </style>

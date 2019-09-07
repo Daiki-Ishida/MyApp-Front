@@ -16,7 +16,7 @@
       <div class="blog-content">{{blog.content}}</div>
     </div>
     <div class="card-actions">
-      <a href="/">Show More</a>
+      <router-link :to="`/blogs/${ blog.id }`">Show More</router-link>
     </div>
   </div>
 </template>
@@ -25,13 +25,6 @@
 export default {
   name: "BlogCard",
   props: ["blog"],
-  // methods: {
-  //   getRandomInt(min, max) {
-  //     min = Math.ceil(min);
-  //     max = Math.floor(max);
-  //     return Math.floor(Math.random() * (max - min)) + min;
-  //   }
-  // },
   computed: {
     issuedAt() {
       const date = new Date(this.blog.created_at);
@@ -42,9 +35,6 @@ export default {
       const min = date.getMinutes();
       return `${year}/${month}/${day} ${hour}:${min}`;
     }
-    // samplePicture() {
-    //   this.getRandomInt(1, 4);
-    // }
   }
 };
 </script>
@@ -101,6 +91,7 @@ export default {
   border: 1px solid #21467d;
   border-radius: 5px;
   padding: 5px;
+  transition: 0.3s;
 }
 
 .card-actions a:hover {

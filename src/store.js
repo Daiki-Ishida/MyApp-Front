@@ -40,6 +40,7 @@ const store = new Vuex.Store({
   state: {
     users: [],
     currentUser: sessionStorage.fetch(),
+    blog: {},
     blogs: []
   },
   getters: {
@@ -51,6 +52,9 @@ const store = new Vuex.Store({
     },
     allBlogs(state) {
       return state.blogs
+    },
+    oneBlog(state) {
+      return state.blog
     }
   },
   mutations: {
@@ -64,8 +68,15 @@ const store = new Vuex.Store({
       state.currentUser = payload
       sessionStorage.save(state.currentUser)
     },
+    logout(state) {
+      state.currentUser = {}
+      sessionStorage.save(state.currentUser)
+    },
     fetchAllBlogs(state, payload) {
       state.blogs = payload
+    },
+    fetchOneBlog(state, payload) {
+      state.blog = payload
     }
   },
   actions: {
@@ -92,6 +103,9 @@ const store = new Vuex.Store({
         commit('login', res.data)
       });
     },
+    logout({ commit }) {
+      commit('logout')
+    },
     fetchAllBlogs({ commit }) {
       url = setUrl("blogs")
       options = setRequestOptions("GET")
@@ -100,6 +114,15 @@ const store = new Vuex.Store({
           commit("fetchAllBlogs", res.data)
         }
       )
+    },
+    fetchOneBlog({ commit }, payload) {
+      const path = "blogs/" + payload
+      url = setUrl(path)
+      options = setRequestOptions("GET")
+      axios.get(url, options).then(res => {
+        commit('fetchOneBlog', res.data)
+      })
+
     }
   }
 })

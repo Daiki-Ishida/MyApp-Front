@@ -3,9 +3,12 @@ import VueRouter from 'vue-router'
 
 import HelloWorld from "./components/HelloWorld";
 import Users from '@/views/Users'
+
 import SignUp from '@/views/SignUp'
 import SignIn from '@/views/SignIn'
+
 import Blogs from '@/views/Blogs'
+import Blog from '@/views/Blog'
 
 
 Vue.use(VueRouter)
@@ -35,6 +38,10 @@ const router = new VueRouter({
       path: '/blogs',
       name: Blogs,
       component: Blogs
+    },
+    {
+      path: '/blogs/:id',
+      component: Blog
     }
   ]
 })

@@ -19,7 +19,13 @@
               <router-link to="/sign-in">Login</router-link>
             </li>
             <li>
+              <a @click="logout">Logout</a>
+            </li>
+            <li>
               <router-link to="/sign-up">Sign Up</router-link>
+            </li>
+            <li>
+              <router-link to="/blogs">Blogs</router-link>
             </li>
           </ul>
         </nav>
@@ -40,6 +46,11 @@ export default {
   computed: {
     currentUser() {
       return this.$store.getters.currentUser;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch("logout");
     }
   }
 };

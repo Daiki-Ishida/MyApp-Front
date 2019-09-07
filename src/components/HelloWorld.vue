@@ -1,7 +1,23 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>Essential Links!!!!</h2>
+    <h2 class="top-msg">
+      This is the sample application made with Vue.js in frontend and Ruby on Rails
+      in backend, in which you will be able to make a post and share it between users.
+    </h2>
+    <h2>Links</h2>
+    <ul>
+      <li>
+        <router-link to="/blogs">Blogs</router-link>
+      </li>
+    </ul>
+    <h2>My Work</h2>
+    <ul>
+      <li>
+        <a href="https://github.com/Daiki-Ishida" target="_blank">Github</a>
+      </li>
+    </ul>
+    <h2>Vue.js Links</h2>
     <ul>
       <li>
         <a href="https://vuejs.org" target="_blank">Core Docs</a>
@@ -43,7 +59,7 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      msg: "Welcome to Your Vue.js App"
+      msg: "Welcome to MyApp!"
     };
   }
 };
@@ -51,9 +67,24 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h1,
+.hello {
+  text-align: center;
+  padding-top: 30px;
+}
+.top-msg {
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 36px;
+}
+
+h1 {
+  font-size: 56px;
+  padding: 30px;
+}
 h2 {
   font-weight: normal;
+  font-size: 24px;
+  padding: 50px;
 }
 ul {
   list-style-type: none;
